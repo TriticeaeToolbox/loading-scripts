@@ -6,12 +6,13 @@ add_stockprop_term.pl
 
 =head1 DESCRIPTION
 
-Usage: perl add_stockprop_term.pl -H dbhost -D dbname [-t] -n term_name
+Usage: perl add_stockprop_term.pl -H dbhost -D dbname [-t] -n term_name [-d term_definition]
 
 -H = db host
 -D = db name
 -t = test, rollback any changes
 -n = name of the new stockprop term
+-d = definition of the new stockprop term
 
 This script will add a new CV Term to the stock_property CV.
 
@@ -32,14 +33,15 @@ my $DB_NAME = "null";
 
 
 
-our ($opt_H, $opt_D, $opt_t, $opt_n);
+our ($opt_H, $opt_D, $opt_t, $opt_n, $opt_d);
 
-getopts('H:D:tn:');
+getopts('H:D:tn:d:');
 
 my $dbhost = $opt_H;
 my $dbname = $opt_D;
 my $test = $opt_t;
 my $term = $opt_n;
+my $definition = $opt_d;
 
 
 
@@ -71,9 +73,9 @@ $sth->execute($a);
 my ($dbxref_id) = $sth->fetchrow_array();
 
 # Add cvterm
-$q = "INSERT INTO public.cvterm (cv_id, name, dbxref_id, is_obsolete, is_relationshiptype) SELECT cv_id, ?, ?, 0, 0 FROM public.cv WHERE name = ?";
+$q = "INSERT INTO public.cvterm (cv_id, name, definition, dbxref_id, is_obsolete, is_relationshiptype) SELECT cv_id, ?, ?, ?, 0, 0 FROM public.cv WHERE name = ?";
 $sth = $dbh->prepare($q);
-$sth->execute($term, $dbxref_id, $CV_NAME);
+$sth->execute($term, $definition, $dbxref_id, $CV_NAME);
 
 
 
