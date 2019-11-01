@@ -14,6 +14,13 @@ Usage: perl load_genetic_chars.pl -H dbhost -D dbname [-t] -c chars -d values
 -c = file of genetic characters (Character,Category,Chromosome,Arm,Description,Values)
 -d = file of lines and allele values (Accession,Character,Value)
 
+This script will load the file of T3 genetic characters.  Each character will be 
+created as a Locus and each potential genetic character value will be loaded as 
+an Allele for that Locus.
+
+In addition, the script  will take the file of T3 lines and genetic character 
+values and associate the value as an Allele for each Accession.
+
 WARNING:  This will clear existing loci and alleles from the database!
 
 =cut

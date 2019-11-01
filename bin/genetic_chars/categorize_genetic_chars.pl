@@ -6,12 +6,15 @@ load_genetic_chars.pl
 
 =head1 DESCRIPTION
 
-Usage: perl load_genetic_chars.pl -H dbhost -D dbname [-t] -c chars -d values
+Usage: perl load_genetic_chars.pl -H dbhost -D dbname [-t] -c chars
 
 -H = db host
 -D = db name
 -t = test, rollback any changes
 -c = file of genetic characters (Character,Category,Chromosome,Arm,Description,Values)
+
+This script will associate each T3 genetic character (breedbase locus) with a category 
+in the T3 Genetic Character Ontology.
 
 NOTE: The T3 Genetitc Character Category ontology must be loaded before running this script!
 
