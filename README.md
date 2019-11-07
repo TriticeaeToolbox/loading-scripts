@@ -87,4 +87,6 @@ export PERL_USE_UNSAFE_INC=1 # Allow the current directory in INC
 
 ## Load Trait Ontology
 
+Follow the workflow described in [ontology-scripts/WORKFLOW.md](https://github.com/TriticeaeToolbox/ontology-scripts/blob/master/WORKFLOW.md)
 
+  - If the CV `composable_cvtypes` is missing, make sure the DB patch `00073` has been run.
