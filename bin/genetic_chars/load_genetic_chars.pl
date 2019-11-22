@@ -72,9 +72,14 @@ my ($q, $sth);
 #### DATABASE FIXES ####
 
 # Clear existing alleles and loci
+$q = "DELETE FROM phenome.stock_allele;";
+$sth = $dbh->prepare($q);
+$sth->execute();
+print STDERR "Removed stock / allele associations\n";
+
 $q = "DELETE FROM phenome.allele;";
 $sth = $dbh->prepare($q);
-$sth->execute(); 
+$sth->execute();
 print STDERR "Removed alleles\n";
 
 $q = "DELETE FROM phenome.locus_alias;";
@@ -82,9 +87,19 @@ $sth = $dbh->prepare($q);
 $sth->execute();
 print STDERR "Removed loci aliases\n";
 
+$q = "DELETE FROM phenome.locus_dbxref_evidence;";
+$sth = $dbh->prepare($q);
+$sth->execute();
+print STDERR "Removed locus dbxref evidence\n";
+
+$q = "DELETE FROM phenome.locus_dbxref;";
+$sth = $dbh->prepare($q);
+$sth->execute();
+print STDERR "Removed locus dbxrefs\n";
+
 $q = "DELETE FROM phenome.locus;";
 $sth = $dbh->prepare($q);
-$sth->execute(); 
+$sth->execute();
 print STDERR "Removed loci\n";
 
 # Update Common Name
