@@ -90,3 +90,34 @@ export PERL_USE_UNSAFE_INC=1 # Allow the current directory in INC
 Follow the workflow described in [ontology-scripts/WORKFLOW.md](https://github.com/TriticeaeToolbox/ontology-scripts/blob/master/WORKFLOW.md)
 
   - If the CV `composable_cvtypes` is missing, make sure the DB patch `00073` has been run.
+
+
+## Load Breeding Programs
+
+There are two perl scripts to aid the bulk loading of breeding programs.
+
+The first `./bin/breeding_programs/add_breeding_program.pl` script can be used to add a single Breeding Program 
+to the specified database with a specified name and description.
+
+```bash
+# Add a single breeding program to the database
+./bin/breeding_programs/add_breeding_program.pl -H localhost -D cxgn_avena -U postgres -P postgrespass -n "Test Breeding Program" -d "This is a Breeding Program used for testing"
+```
+
+The second `./bin/breeding_programs/add_breeding_programs_bulk.pl` script can be used to parse a CSV file containing 
+Breeding Program information (designed to use the T3 contributing data programs table).  Each row of a breeding 
+program's information will added to the database if the name does not yet exist.
+
+Example CSV file:
+```bash
+# From ./data/breeding_programs/oat_breeding_programs.csv
+Breeding Program,Code,Collaborator,Description,Institution
+"AAES, Auburn University",AUB,Kathryn Glass,"Alabama Agricultural Experiment Station (AAES), Auburn University, AL-USA.",Auburn University
+AAFC Agassiz,ABC,,"Agriculture and Agri-Food Canada (AAFC) Pacific Agri-Food Research Centre (PARC) in Agassiz, BC-CAN.",Agriculture and Agri-Food Canada
+AAFC Brandon,MTB,Jennifer W. Mitchell-Fetch,"Agriculture and Agri-Food Canada (AAFC) Brandon Research Centre, MB-CAN.",Agriculture and Agri-Food Canada
+```
+
+```bash
+# Parse a CSV file of breeding program information
+./bin/breeding_programs/add_breeding_programs_bulk.pl -H localhost -D cxgn_avena -U postgres -P postgrespass -d ./data/breeding_programs/oat_breeding_programs.csv
+```
