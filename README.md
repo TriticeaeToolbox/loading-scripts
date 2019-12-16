@@ -121,3 +121,24 @@ AAFC Brandon,MTB,Jennifer W. Mitchell-Fetch,"Agriculture and Agri-Food Canada (A
 # Parse a CSV file of breeding program information
 ./bin/breeding_programs/add_breeding_programs_bulk.pl -H localhost -D cxgn_avena -U postgres -P postgrespass -d ./data/breeding_programs/oat_breeding_programs.csv
 ```
+
+
+## Load Accessions
+
+Accessions can be bulk loaded using an Excel template through the web site (Manage > Accessions).  
+
+The [breedbase R package](https://github.com/TriticeaeToolbox/breeDBase.R) has helper functions to help create 
+a breedbase accession template.  The R script `./bin/accessions/add_accessions.R` contains the `createAccessions()` 
+function which will read the T3 line information file and create a list of Accessions.  These Accessions can be 
+passed to the `breedbase::writeAccessionTemplate()` function to create the breedbase accession template file(s).
+
+```R
+# Create Accessions from the T3 line information file
+a <- createAccessions(lines="./data/accessions/oat_line_records.csv", programs="./data/breeding programs/oat_breeding_programs.csv", genus="Avena")
+# Create a breedbase acccession template table
+t <- buildAccessionTemplate(a)
+# Write the breedbase accession template table to files
+writeAccessionTemplate(t, output="./templates/accessions/oat_accessions.xls", chunk=6000)
+```
+
+Once created, the accession template file(s) can be uploaded to the breedbase website.
