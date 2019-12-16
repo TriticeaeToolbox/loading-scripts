@@ -48,8 +48,6 @@ createAccessions <- function(lines=NULL, programs=NULL, genus=NULL) {
       program <- filter(programs, Code == breeding_program)
       if ( nrow(program) == 1 ) {
         properties$organization_names = c(program$Breeding.Program)
-        properties$institute_names = c(program$Breeding.Program)
-        properties$institute_codes = c(program$Code)
       }
     }
     
