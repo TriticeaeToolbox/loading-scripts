@@ -4,7 +4,20 @@ library(tidyverse)
 library(breedbase)
 
 
-
+#'
+#' Create Accessions
+#'
+#' Read a T3 line information file and create a list of Accessions 
+#' using the breedbase R package.  The Accessions can then be used 
+#' to create a breedbase accession upload template.
+#'
+#' @param lines = file path to T3 line information
+#' @param programs = file path to T3 breeding program information
+#' @param genus = Genus name to prepend to line species, if provided
+#'
+#' @returns a list of breedbase::Accessions with the key set to the 
+#' Accession name
+#' 
 createAccessions <- function(lines=NULL, programs=NULL, genus=NULL) {
   if ( is.null(lines) ) {
     stop("ERROR: You must provide the file path to the T3 line data file")
@@ -92,7 +105,12 @@ createAccessions <- function(lines=NULL, programs=NULL, genus=NULL) {
 }
 
 
-
+#
+# Parse Line Name
+# 
+# Replace '/' with 'x' and '&' with 'and' 
+# in Accession names loaded from T3.
+#
 parseLineName <- function(name) {
   name <- trimws(name)
   name <- gsub("/", "x", name)
