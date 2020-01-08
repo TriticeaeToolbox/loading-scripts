@@ -84,6 +84,35 @@ export PERL_USE_UNSAFE_INC=1 # Allow the current directory in INC
 ```
 
 
+#### Web Instance Setup
+
+**If the node JS modules don't install properly:**
+
+Example: if there is a permission error during the build process when performing a `git clone`
+
+1) Install NodeJS on the docker host machine, if not already
+   The web docker container currently has node version 10 installed
+
+```bash
+# From the docker host
+curl -sL https://deb.nodesource.com/setup_10.x | bash -
+apt-get install nodejs
+```
+
+2) Install the node packages from the docker host machine
+   These will get mounted to the SGN repo via Docker
+
+```bash
+# From the docker host, DO NOT RUN AS ROOT
+cd {BB_HOME}/repos/{SGN_REPO}/js
+rm -rf node_modules
+npm cache clean -f
+npm install
+```
+
+3) Restart the web container
+
+
 
 ## Load Trait Ontology
 
