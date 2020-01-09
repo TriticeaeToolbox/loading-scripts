@@ -11,7 +11,7 @@ Usage: perl add_stock_pedigrees.pl -H dbhost -D dbname [-t] -d lines
 -H = db host
 -D = db name 
 -t = test, rollback any changes
--d = file of T3 lines with pedigrees (Name, Species, GRIN, Synonym, Breeding Program, Paren1, Parent2, Pedigree, Description)
+-d = file of T3 lines with pedigrees (Name, Species, GRIN, Synonym, Breeding Program, Parent1, Parent2, Pedigree, Description)
 
 This script will load the pedigrees for lines from T3.  The input file is the line records 
 file from T3's Bulk Download.  The purdy pedigree string will be loaded as a 'pedigree' stock 
@@ -72,7 +72,7 @@ my ($pedigree_cvterm_id) = $sth->fetchrow_array();
 my $csv = Text::CSV->new({ sep_char => ',' });
 open(my $data, '<', $lines_file) or die "Could not open lines file '$lines_file': $!\n";
 
-# Loop through genetic characters
+# Loop through each line
 while ( my $line = <$data> ) {
     chomp $line;
     next if ($. == 1); # skip header line
