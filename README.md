@@ -198,9 +198,9 @@ Then, a file (following the T3 bulk line information format):
 
 ```
 # pedigrees.csv
-   Name            Species GRIN  Synonym Breeding Program Parent1 Parent2 Pedigree                        Description
- 1 02-18228                                           Pio25R26/ 9634-24437//95-4162
- 2 02-194638-1                                                            Patton / Cardinal // 96-2550
+   Name         Species GRIN  Synonym Breeding Program Parent1 Parent2 Pedigree                        Description
+ 1 02-18228                                                            Pio25R26/ 9634-24437//95-4162
+ 2 02-194638-1                                                         Patton / Cardinal // 96-2550
  ```
 
 can be used to define the pedigrees for each of the Accessions.  The `add_stock_pedigrees.pl` perl script can be used to add the pedigrees as stock properties of the Accessions:
