@@ -1,3 +1,4 @@
+
 breeDBase loading scripts
 =============
 
@@ -171,3 +172,41 @@ writeAccessionTemplate(t, output="./templates/accessions/oat_accessions.xls", ch
 ```
 
 Once created, the accession template file(s) can be uploaded to the breedbase website.
+
+
+### Pedigrees
+
+Pedigrees can be stored in two different ways:
+
+  1) The **official Breedbase way** is to assign two parents to each Accession entry.  Each of the parents, in turn, need to be Accession entries themselves.  This method allows the interactive pedigree viewer to work.
+
+  2) The **simplified T3 way** is to add a Purdy pedigree string as the pedigree property of the Accession.  The pedigree property is not parsed by the database and is displayed on the Stock detail page.  This method allows a user to search for Accessions on the text of the pedigree string.
+
+**Add Pedigrees the Breedbase way:**
+
+A pedigree file (a spreadsheet containing a table of Accessions and their parent names) can be uploaded through the website from the **Manage > Accessions** page.  The breedbase R package has helper functions to help create the spreadsheet template.
+
+**Add Pedigrees the T3 way:**
+
+First, the pedigree stock property needs to be added to the database.  The `add_stockprop_term.pl` perl script can be used:
+
+```bash
+perl ./bin/accessions/add_stockprop_term.pl -H localhost -D cxgn_avena -n pedigree -d "Purdy pedigree string of an Accession"
+```
+
+Then, a file (following the T3 bulk line information format):
+
+```
+# pedigrees.csv
+   Name            Species GRIN  Synonym Breeding Program Parent1 Parent2 Pedigree                        Description
+ 1 02-18228                                           Pio25R26/ 9634-24437//95-4162
+ 2 02-194638-1                                                            Patton / Cardinal // 96-2550
+ ```
+
+can be used to define the pedigrees for each of the Accessions.  The `add_stock_pedigrees.pl` perl script can be used to add the pedigrees as stock properties of the Accessions:
+
+```bash
+perl ./bin/accessions/add_stock_pedigrees.pl -H localhost -D cxgn_avena -d pedigrees.csv
+```
+
+Finally, in order for the pedigree property to be displayed on the Stock detail page, the `editable_stock_props` configuration variable (`sgn_local.conf`) needs to have `pedigree` appended to it.
