@@ -891,3 +891,4 @@ GRANT SELECT ON TABLE tomato_gff.fmeta TO web_usr;
 GRANT SELECT ON TABLE tomato_gff.ftype TO web_usr;
 GRANT SELECT,INSERT,UPDATE,DELETE ON TABLE public.matviews TO web_usr;
 GRANT ALL ON SEQUENCE public.matviews_mv_id_seq TO web_usr;
+GRANT SELECT ON materialized_phenotype_jsonb_table TO web_usr;
