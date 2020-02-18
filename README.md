@@ -188,13 +188,18 @@ A pedigree file (a spreadsheet containing a table of Accessions and their parent
 
 **Add Pedigrees the T3 way:**
 
-First, the pedigree stock property needs to be added to the database.  The `add_stockprop_term.pl` perl script can be used:
+Purdy Pedigree strings no longer have to be added to the database separately.  The T3 breedbase instances support 
+the Accession properties of `purdy_pedigree` and `filial_generation` and can be added as an Accession property 
+directly from the Accession upload template.  The breedbase R package has helper functions to help create the Accession 
+upload template.
+
+~~First, the pedigree stock property needs to be added to the database.  The `add_stockprop_term.pl` perl script can be used:~~
 
 ```bash
 perl ./bin/accessions/add_stockprop_term.pl -H localhost -D cxgn_avena -n pedigree -d "Purdy pedigree string of an Accession"
 ```
 
-Then, a file (following the T3 bulk line information format):
+~~Then, a file (following the T3 bulk line information format):~~
 
 ```
 # pedigrees.csv
@@ -203,10 +208,10 @@ Then, a file (following the T3 bulk line information format):
  2 02-194638-1                                                         Patton / Cardinal // 96-2550
  ```
 
-can be used to define the pedigrees for each of the Accessions.  The `add_stock_pedigrees.pl` perl script can be used to add the pedigrees as stock properties of the Accessions:
+~~can be used to define the pedigrees for each of the Accessions.  The `add_stock_pedigrees.pl` perl script can be used to add the pedigrees as stock properties of the Accessions:~~
 
 ```bash
 perl ./bin/accessions/add_stock_pedigrees.pl -H localhost -D cxgn_avena -d pedigrees.csv
 ```
 
-Finally, in order for the pedigree property to be displayed on the Stock detail page, the `editable_stock_props` configuration variable (`sgn_local.conf`) needs to have `pedigree` appended to it.
+~~Finally, in order for the pedigree property to be displayed on the Stock detail page, the `editable_stock_props` configuration variable (`sgn_local.conf`) needs to have `pedigree` appended to it.~~
