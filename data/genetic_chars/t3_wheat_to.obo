@@ -1,0 +1,481 @@
+format-version: 1.2
+saved-by: dwaring
+default-namespace: plant_trait_ontology
+ontology: to
+
+[Term]
+id: TO:0000387
+name: plant trait
+def: "A measurable or observable characteristic of a cellular component (GO:0005575), biological process (GO:0008150) or molecular function (GO:0003674) that is part of, or has participant a plant anatomical entity (PO:0025131) and/or a plant structure development stage (PO:0009012)." [GO:0003674, GO:0005575, GO:0008150, Gramene:pankaj_jaiswal, PO:0009012, PO:0025131, TO:cooperl]
+comment: This includes physiological, molecular and biochemical traits as well.
+synonym: "plant phenotype (related)" RELATED []
+synonym: "plant quality (related)" RELATED []
+xref: TO_GIT:52
+created_by: jaiswalp
+
+[Term]
+id: TO:0000164
+name: stress trait
+def: "Response by the plant in terms of resistivity or sensitivity to either the biotic or the abiotic types of stress." [Gramene:pankaj_jaiswal]
+synonym: "crop damage (related)" RELATED []
+synonym: "stress resistance (related)" RELATED []
+synonym: "stress susceptibility (related)" RELATED []
+synonym: "stress tolerance (related)" RELATED []
+is_a: TO:0000387 ! plant trait
+
+[Term]
+id: TO:0000168
+name: abiotic stress trait
+def: "Response by the plant in terms of resistivity or sensitivity to abiotic stress." [Gramene:pankaj_jaiswal]
+synonym: "abiotic stress tolerance (related)" RELATED []
+is_a: TO:0000164 ! stress trait
+
+[Term]
+id: TO:0000482
+name: chemical stress sensitivity
+def: "Response by the plant in terms of resistivity or senility to chemical stress." [Gramene:pankaj_jaiswal]
+is_a: TO:0000168 ! abiotic stress trait
+
+[Term]
+id: TO:0000432
+name: temperature response trait
+def: "Response by the plant in terms of sensitivity to temperature stress." [Gramene:pankaj_jaiswal]
+is_a: TO:0000168 ! abiotic stress trait
+
+[Term]
+id: TO:0000017
+name: plant morphology trait
+def: "A plant trait (TO:0000387) which is a morphological quality of a plant anatomical entity (PO:0025131) or a constituent cellular component (GO:0005575) contained therein." [GO:0005575, Gramene:pankaj_jaiswal, PO:0025131, TO:cooperl]
+comment: Includes traits of plant structures (PO:0009011) such as plant cell (PO:0009002), plant organ (PO:0009008), portion of plant tissue (PO:0009007), vascular system (PO:0000034), whole plant (PO:0000003) and seed (PO:0009010), as well as those of plant anatomical spaces (PO:0025117) and portions of plant substance (PO:0025161).
+synonym: "plant architecture trait (related)" RELATED []
+synonym: "plant structure trait (related)" RELATED []
+xref: TO_GIT:54
+is_a: TO:0000387 ! plant trait
+
+[Term]
+id: TO:0000839
+name: plant structure morphology trait
+def: "A plant morphology trait (TO:0000017) which is a quality of a plant structure (PO:0009011)." [PO:0009011, TO:cooperl, TO:moorel]
+xref: TO_GIT:149
+is_a: TO:0000017 ! plant morphology trait
+created_by: moorel
+creation_date: 2012-07-12T11:29:26Z
+
+[Term]
+id: TO:0000398
+name: whole plant morphology trait
+def: "A plant structure morphology trait (TO:0000839) which is a quality of a whole plant (PO:0000003)." [PO:0000003, TO:cooperl]
+is_a: TO:0000839 ! plant structure morphology trait
+
+[Term]
+id: TO:1000012
+name: whole plant size
+def: "A whole plant morphology trait (TO:0000398) which is the size of a whole plant (PO:0000003)." [TO:cooperl]
+synonym: "bush size (narrow)" NARROW [TO:TermGenie]
+synonym: "clonal colony size (related)" RELATED [TO:TermGenie]
+synonym: "colony size (related)" RELATED [TO:TermGenie]
+synonym: "frutex size (narrow)" NARROW [TO:TermGenie]
+synonym: "frutices size (narrow)" NARROW [TO:TermGenie]
+synonym: "gametophyte size (narrow)" NARROW [TO:TermGenie]
+synonym: "herb size (narrow)" NARROW [TO:TermGenie]
+synonym: "liana size (narrow)" NARROW [TO:TermGenie]
+synonym: "planta entera (Spanish) size (exact)" EXACT [TO:TermGenie]
+synonym: "prothalli size (narrow)" NARROW [TO:TermGenie]
+synonym: "prothallium size (narrow)" NARROW [TO:TermGenie]
+synonym: "prothallus size (narrow)" NARROW [TO:TermGenie]
+synonym: "seedling size (narrow)" NARROW [TO:TermGenie]
+synonym: "shrub size (narrow)" NARROW [TO:TermGenie]
+synonym: "sporophyte size (narrow)" NARROW [TO:TermGenie]
+synonym: "suffrutex size (narrow)" NARROW [TO:TermGenie]
+synonym: "suffrutices size (narrow)" NARROW [TO:TermGenie]
+synonym: "tree size (narrow)" NARROW [TO:TermGenie]
+synonym: "vine size (narrow)" NARROW [TO:TermGenie]
+synonym: "woody clump size (narrow)" NARROW [TO:TermGenie]
+is_a: TO:0000398 {is_inferred="true"} ! whole plant morphology trait
+created_by: cooperl
+creation_date: 2015-12-30T19:41:19Z
+
+[Term]
+id: TO:0000207
+name: plant height
+def: "A whole plant morphology trait (TO:0000398) which is the height of a whole plant (PO:0000003)." [IRRI:SES, PO:0000003, TO:cooperl]
+comment: Comment: Refers to: height (PATO_0000119): A 1-D extent quality inhering in a bearer by virtue of the bearer's vertical dimension of extension.
+synonym: "Ht (related)" RELATED []
+synonym: "PTHT (related)" RELATED []
+synonym: "shoot height (related)" RELATED []
+xref: PATO:0000119
+xref: TO_GIT:367
+xref: TO_GIT:84
+is_a: TO:0000398 ! whole plant morphology trait
+relationship: part_of TO:1000012 ! whole plant size
+
+[Term]
+id: TO:0000161
+name: radiation response trait
+def: "Response shown by the plant in terms of sensitivity to one or more types of radiation stress (quality and quantity of light)." [Gramene:pankaj_jaiswal]
+synonym: "radiation sensitivity (related)" RELATED []
+synonym: "RADSN (related)" RELATED []
+synonym: "response to radiation (related)" RELATED []
+is_a: TO:0000168 ! abiotic stress trait
+
+[Term]
+id: TO:0000075
+name: light sensitivity
+def: "Response shown by the plant in terms of sensitivity to light stress (quality and quantity of light)." [Gramene:pankaj_jaiswal]
+is_a: TO:0000161 ! radiation response trait
+
+[Term]
+id: TO:0000229
+name: photoperiod sensitivity trait
+def: "Sensitivity response on the plant development and the related growth stages by the duration of light, to which the plant has been exposed." [Gramene:pankaj_jaiswal]
+synonym: "PPDSN (related)" RELATED []
+is_a: TO:0000075 ! light sensitivity
+
+[Term]
+id: TO:0000183
+name: other miscellaneous trait
+def: "The trait instances, which either cannot be assigned any of the eight top level parent terms such as biochemical, anatomy, development quality, stature/vigor, sterility/fertility, stress and the yield or are yet to be assigned a parent." [Gramene:pankaj_jaiswal]
+is_a: TO:0000387 ! plant trait
+
+[Term]
+id: TO:0000357
+name: plant growth and development trait
+def: "A plant trait (TO:0000387) which is the growth (GO:0048590) and development (GO:0032502) of a plant anatomical entity (PO:0025131) or a constituent cellular component (GO:0005575)." [Gramene:pankaj_jaiswal, TO:cooperl]
+comment: Growth and development traits are qualities of the development of the whole plant or plant parts.
+xref: GO:0032502
+xref: GO:0048590
+xref: TO_GIT:248
+is_a: TO:0000387 ! plant trait
+created_by: jaiswalp
+
+[Term]
+id: TO:0000933
+name: plant phenological trait
+def: "A growth and development trait (TO:0000357) which is the timing of the occurrence of plant structure development stages (PO:0009012) and the relevant biological processes (GO:0008150)." [TO:cooperl]
+xref: TO_GIT:266
+is_a: TO:0000357 ! plant growth and development trait
+created_by: cooperl
+creation_date: 2014-05-05T17:32:19Z
+
+[Term]
+id: TO:0002616
+name: flowering time trait
+def: "A plant phenological trait (TO:0000933) which is a quality of the timing of anthesis (flowering stage; PO:0007616)." [Gramene:pankaj_jaiswal, TO:cooperl]
+comment: Often influenced by the environment that includes, day light, temperature and geographic location.
+synonym: "anthesis timing (related)" RELATED []
+synonym: "time of flowering (related)" RELATED []
+xref: TO_GIT:267
+is_a: TO:0000933 ! plant phenological trait
+
+[Term]
+id: TO:0000179
+name: biotic stress trait
+def: "Response by the plant in terms of resistivity or sensitivity to biotic stress." [Gramene:pankaj_jaiswal]
+is_a: TO:0000164 ! stress trait
+
+[Term]
+id: TO:0000236
+name: crop damage resistance
+synonym: "crop damage resistance trait (exact)" EXACT []
+is_a: TO:0000179 ! biotic stress trait
+
+[Term]
+id: TO:0000112
+name: disease resistance
+def: "An assay to determine the resistance exhibited by a plant or a group of plants (population) in response to the disease caused by a pathogen infection as compared to the susceptible and/or the reference plants of the same species." [Gramene:pankaj_jaiswal]
+comment: It represents the damage done by the diease and/or the pathogen to the plant. The damage is a direct measure of resistance to the particular pathogen variety causing the disease.
+synonym: "disease control (exact)" EXACT []
+synonym: "disease resistance trait (exact)" EXACT []
+synonym: "disease susceptibility (narrow)" NARROW []
+synonym: "disease tolerance (exact)" EXACT []
+is_a: TO:0000236 ! crop damage resistance
+
+[Term]
+id: TO:0000439
+name: fungal disease resistance
+def: "The resistance exhibited by a plant or a group of plants (population) in response to the disease caused by a fungal pathogen infection as compared to the susceptible and/or the reference plants of the same species." [Gramene:pankaj_jaiswal]
+comment: It represents the damage done by the diease and/or the pathogen to the plant. The damage is a direct measure of resistance to the particular fungal strain causing the disease.
+is_a: TO:0000112 ! disease resistance
+
+[Term]
+id: TO:0000054
+name: animal damage resistance
+def: "Response by the plant in terms of resistivity or sensitivity to the animals infesting them." [Gramene:pankaj_jaiswal]
+synonym: "pest resistance (related)" RELATED []
+is_a: TO:0000236 ! crop damage resistance
+
+[Term]
+id: TO:0000261
+name: insect damage resistance
+def: "An assay to determine the resistance exhibited by a plant or a group of plants (population) in response to insect infestation as compared to the susceptible and/or the reference plants of the same species." [Gramene:pankaj_jaiswal, IRRI:SES]
+comment: It represents the damage done by the insects to the plant. The damage is a direct measure of resistance to the particular insect variety. The test evaluation is valid if insect population is uniformly distributed at a high level across the screening box or the field.
+synonym: "insect resistance (narrow)" NARROW []
+is_a: TO:0000054 ! animal damage resistance
+created_by: jaiswalp
+
+[Term]
+id: TO:0000148
+name: viral disease resistance
+def: "An assay to determine the resistance exhibited by a plant or a group of plants (population) in response to the disease caused by a viral pathogen infection as compared to the susceptible and/or the reference plants of the same species." [Gramene:pankaj_jaiswal, IRRI:SES]
+comment: It represents the damage done by the diease and/or the viral pathogen to the plant. The damage is a direct measure of resistance to the particular viral strain causing the diease.
+is_a: TO:0000112 ! disease resistance
+
+[Term]
+id: TO:0000837
+name: cardinal part of a multi-tissue plant structure morphology trait
+def: "A plant structure morphology trait (TO:0000839) which is a quality of a cardinal organ part of a multi-tissue plant structure (PO:0025498)." [PO:0025498, TO:moorel]
+xref: TO_GIT:147
+is_a: TO:0000839 ! plant structure morphology trait
+created_by: moorel
+creation_date: 2012-07-09T13:36:14Z
+
+[Term]
+id: TO:0000754
+name: cardinal organ part morphology trait
+def: "A cardinal organ part of a multi-tissue plant structure morphology trait (TO:0000837) which is a quality of a cardinal organ part (PO:0025001)." [PO:0025001, TO:cooperl, TO:moorel]
+xref: TO_GIT:63
+is_a: TO:0000837 ! cardinal part of a multi-tissue plant structure morphology trait
+created_by: moorel
+creation_date: 2012-04-26T13:09:13Z
+
+[Term]
+id: TO:0002718
+name: awn morphology trait
+def: "A cardinal organ part morphology trait (TO:0000754) which is a quality of an awn (PO:0025349)." [Gramene:pankaj_jaiswal, PO:0025349, TO:moorel]
+is_a: TO:0000754 ! cardinal organ part morphology trait
+
+[Term]
+id: TO:0002734
+name: awn presence
+def: "An awn morphology trait (TO:0002718) which is the presence or absence of an awn (PO:0025349). Observation may include relative awn size." [Gramene:pankaj_jaiswal, PO:0025349, TO:moorel]
+comment: Refer to presence value PATO:0000458.
+synonym: "AWNPLU (related)" RELATED []
+xref: PATO:0000458
+is_a: TO:0002718 ! awn morphology trait
+
+[Term]
+id: TO:0000264
+name: lemma and palea color
+def: "A lemma and palea morphology trait (TO:0000079) which is the color of the lemma (PO:0009037) and the palea (PO:0009038)." [Gramene:pankaj_jaiswal, IRRI:SES, PO:0009037, PO:0009038, TO:moorel]
+comment: Refer to color PATO:0000014: A composite chromatic quality composed of hue, saturation and intensity parts.
+synonym: "LEMCL (related)" RELATED []
+synonym: "Lemma color (related)" RELATED []
+synonym: "LEMPALCL (related)" RELATED []
+synonym: "LmPC (related)" RELATED []
+synonym: "PALCL (related)" RELATED []
+synonym: "palea color (related)" RELATED []
+xref: PATO:0000014
+is_a: TO:0000079 ! flower bract morphology trait
+
+[Term]
+id: TO:0000079
+name: flower bract morphology trait
+def: "A bract morphology trait (TO:0000815) which is a quality of a flower bract (PO:0009034)." [Gramene:pankaj_jaiswal, PO:0009034, TO:cooperl]
+xref: TO_GIT:390
+is_a: TO:0000815 ! bract morphology trait
+created_by: cooperl
+
+[Term]
+id: TO:0000815
+name: bract morphology trait
+def: "A phyllome morphology trait (TO:0000747) which is a quality of a bract (PO:0009055)." [PO:0009055, TO:cooperl]
+xref: TO_GIT:109
+is_a: TO:0000747 ! phyllome morphology trait
+created_by: moorel
+creation_date: 2012-06-26T14:29:09Z
+
+[Term]
+id: TO:0000747
+name: phyllome morphology trait
+def: "A plant organ morphology trait (TO:0000736) which is quality of a phyllome (PO:0006001)." [PO:0006001, TO:cooperl]
+xref: TO_GIT:60
+is_a: TO:0000736 ! plant organ morphology trait
+created_by: moorel
+creation_date: 2012-04-25T01:09:12Z
+
+[Term]
+id: TO:0000736
+name: plant organ morphology trait
+def: "A multi-tissue plant structure morphology trait (TO:0000836) which is a quality of a plant organ (PO:0009008)." [PO:0009008, TO:cooperl]
+xref: TO_GIT:55
+is_a: TO:0000836 ! multi-tissue plant structure morphology trait
+created_by: moorel
+creation_date: 2012-04-19T10:36:57Z
+
+[Term]
+id: TO:0000836
+name: multi-tissue plant structure morphology trait
+def: "A plant structure morphology trait (TO:0000839) which is a quality of a multi-tissue plant structure (PO:0025496)." [PO:0025496, TO:moorel]
+xref: TO_GIT:147
+is_a: TO:0000839 ! plant structure morphology trait
+created_by: moorel
+creation_date: 2012-07-09T11:41:28Z
+
+[Term]
+id: TO:0002629
+name: fruit morphology trait
+def: "A multi-tissue plant structure morphology trait (TO:0000836) which is a quality of a fruit (PO:0009001)." [Gramene:pankaj_jaiswal, PO:0009001, TO:moorel]
+synonym: "fruit morphology (related)" RELATED []
+is_a: TO:0000836 ! multi-tissue plant structure morphology trait
+
+[Term]
+id: TO:0002617
+name: fruit color
+def: "A fruit morphology trait (TO:0002617) which is the color of a fruit (PO:0009001)." [Gramene:pankaj_jaiswal, PO:0009001, TO:moorel]
+comment: Refer to color PATO:0000014: A composite chromatic quality composed of hue, saturation and intensity parts.
+xref: PATO:0000014
+is_a: TO:0002629 ! fruit morphology trait
+
+[Term]
+id: TO:0000597
+name: plant quality trait
+def: "A plant trait (TO:0000387) that contributes to the overall utility, nutritional, or economic value of a plant, plant structure (PO:0009011) or plant product" [Gramene:pankaj_jaiswal, ISBN:9781118313718, TO:cooperl]
+comment: Quality traits of a plant, plant structure or plant product vary from crop production to food consumption factors and may include organoleptic properties (flavor, aroma, appearance, texture, etc), storability, processing qualities and nutritional aspects. Market quality standards for crops are based on complex interaction of social, economic and biological factors and are highly crop-specific (Acquaah, 2012).\n\nPlant traits from other upper level classes may contribute to (as part_of children) to specific plant quality traits.
+xref: TO_GIT:260
+is_a: TO:0000387 ! plant trait
+created_by: jaiswalp
+
+[Term]
+id: TO:0001068
+name: processing quality trait
+def: "A plant quality trait (TO:0000597) that is the utility of a plant, plant structure (PO:0009011) or plant product for post-harvest chemical, biological or mechanical transformation into a desired end product." [TO:cooperl]
+xref: TO_GIT:426
+is_a: TO:0000597 ! plant quality trait
+created_by: Laurel_Cooper
+creation_date: 2017-12-07T10:36:57Z
+
+[Term]
+id: TO:0001069
+name: cooking quality trait
+def: "A processing quality trait (TO:0001068) that is the utility of a plant, plant structure (PO:0009011) or plant product for a food cooking process (FOODON:03450002)." [FOODON:03450002, TO:cooperl]
+is_a: TO:0001068 ! processing quality trait
+creation_date: 2017-12-08T00:41:11Z
+
+[Term]
+id: TO:0000184
+name: seed morphology trait
+def: "A multi-tissue plant structure morphology trait (TO:0000836) which is a quality of a seed (PO:0009010)." [Gramene:pankaj_jaiswal, PO:0009010, TO:moorel]
+is_a: TO:0000836 ! multi-tissue plant structure morphology trait
+
+[Term]
+id: TO:0000990
+name: seed hardness
+def: "A seed morphology trait (TO:0000184) which is the hardness of a seed (PO:0009010)." [TO:cooperl]
+xref: PATO:0000048
+is_a: TO:0000184 ! seed morphology trait
+created_by: ethan_johnson
+
+[Term]
+id: TO:0000931
+name: seed quality trait
+def: "A plant quality trait (TO:0000597) which is the commercial and /or economical value of a seed (PO:0009010) , or its overall improvement." [TO:cooperl]
+xref: TO_GIT:209
+is_a: TO:0000597 ! plant quality trait
+created_by: cooperl
+creation_date: 2014-03-17T11:41:08Z
+
+[Term]
+id: TO:0000488
+name: seed composition quality trait
+is_a: TO:0000931 ! seed quality trait
+
+[Term]
+id: TO:0000490
+name: seed protein composition trait
+def: "A seed composition based quality trait (TO:0000488) which is the amount of protein (CHEBI_36080) in a seed (PO:0009010)." []
+is_a: TO:0000488 ! seed composition quality trait
+
+[Term]
+id: TO:0000250
+name: plant vigor trait
+def: "A plant trait (TO:0000387) which is a measure of the active and/or healthy growth and development of a plant stucture (PO:0009011) or a population of plants." [TO:cooperl]
+comment: Plants vigor traits include those of a whole plant (PO:00009011; inclucluding a seedling), or parts of the plant such as a seed (PO:0009010), or of explants such as anthers (PO:0009066) or cuttings.
+synonym: "plant vigour trait (exact)" EXACT []
+xref: TO_GIT:xyz
+is_a: TO:0000387 ! plant trait
+
+[Term]
+id: TO:0000430
+name: germination rate
+def: "Rate of germination of the seed." [Gramene:pankaj_jaiswal]
+synonym: "germination speed (related)" RELATED []
+synonym: "GERMRATE (related)" RELATED []
+synonym: "GERMSP (related)" RELATED []
+is_a: TO:0000250 ! plant vigor trait
+
+[Term]
+id: TO:0020016
+name: seed texture
+def: "A seed morphology trait (TO:0000184) which is the texture of a seed (PO:0009010)." [PO:0009010, TO:moorel]
+comment: Refer to texture PATO:0000150: A morphologic quality inhering in a bearer by virtue of the bearer's relative size, organization and distribution of its surface elements or the representation or invention of the appearance of its surface; visual and tactile surface characteristics.
+xref: TO:0000150
+xref: TO_GIT:213
+is_a: TO:0000184 ! seed morphology trait
+
+[Typedef]
+id: evaluation_location
+name: evaluation location
+
+[Typedef]
+id: from_country
+name: from country
+
+[Typedef]
+id: has_absolute_phenotype
+name: has absolute phenotype
+
+[Typedef]
+id: has_dividend_entity
+name: has dividend entity
+
+[Typedef]
+id: has_dividend_quality
+name: has dividend quality
+
+[Typedef]
+id: has_divisor_entity
+name: has divisor entity
+
+[Typedef]
+id: has_divisor_quality
+name: has divisor quality
+
+[Typedef]
+id: has_part
+name: has part
+xref: BFO:0000051
+
+[Typedef]
+id: has_phenotype_score
+name: has phenotype score
+
+[Typedef]
+id: has_phenotype_variable
+name: has phenotype variable
+
+[Typedef]
+id: has_ratio_quality
+name: has ratio quality
+
+[Typedef]
+id: has_relative_phenotype
+name: has relative phenotype
+
+[Typedef]
+id: inheres_in
+name: inheres in
+xref: RO:0000052
+
+[Typedef]
+id: occurs_in
+name: occurs in
+xref: BFO:0000066
+
+[Typedef]
+id: part_of
+name: part of
+xref: BFO:0000050
+
+[Typedef]
+id: relative_to
+name: relative to
