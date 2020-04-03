@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-load_genetic_chars.pl
+categorize_genetic_chars.pl
 
 =head1 DESCRIPTION
 

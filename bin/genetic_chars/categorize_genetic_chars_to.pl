@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-load_genetic_chars_to.pl
+categorize_genetic_chars_to.pl
 
 =head1 DESCRIPTION
 
@@ -60,7 +60,7 @@ my ($q, $sth);
 #### ASSOCIATE LOCI WITH CVTERMS ####
 
 # Get DB ID
-$q = "SELECT db_id FROM public.db WHERE name = ?'";
+$q = "SELECT db_id FROM public.db WHERE name = ?";
 $sth = $dbh->prepare($q);
 $sth->execute($DB_NAME);
 my ($DB_ID) = $sth->fetchrow_array();
@@ -98,7 +98,6 @@ while ( my $line = <$data> ) {
         # Found matching locus...
         if ( $locus_id ) {
 
-
             # Get matching cvterm dbxref_id
             $q = "SELECT dbxref_id FROM public.dbxref WHERE db_id = ? AND accession = ?;";
             $sth = $dbh->prepare($q);
@@ -118,7 +117,7 @@ while ( my $line = <$data> ) {
                 $sth = $dbh->prepare($q);
                 $sth->execute($locus_dbxref_id, $dbxref_id, $SP_PERSON_ID, 'FALSE');
 
-                print STDERR "Added $locus_name to category $locus_category...\n";
+                print STDERR "Added $locus_name to TO Term $to_id...\n";
             }
 
             # No matching cvterm
