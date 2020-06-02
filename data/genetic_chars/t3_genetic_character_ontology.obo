@@ -5,71 +5,71 @@ saved-by: t3
 default-namespace: t3_genetic_character_ontology
 
 [Term]
-id: GC:T3_GC_ROOT
-name: genetic character categories
+id: T3:T3_GC_ROOT
+name: T3 Genetic Character Categories
 
 [Term]
-id: GC:Agronomic
+id: T3:Agronomic
 name: Agronomic
 def: "Agronomic genetic characters" []
-is_a: GC:T3_GC_ROOT
+is_a: T3:T3_GC_ROOT
 
 [Term]
-id: GC:Biotic
+id: T3:Biotic
 name: Biotic stress
 def: "Biotic genetic characters" []
-is_a: GC:T3_GC_ROOT
+is_a: T3:T3_GC_ROOT
 
 [Term]
-id: GC:Biotic_FHB
+id: T3:Biotic_FHB
 name: Biotic stress: FHB
 def: "Biotic stress: FHB genetic characters" []
-is_a: GC:Biotic
+is_a: T3:Biotic
 
 [Term]
-id: GC:Biotic_Insect
+id: T3:Biotic_Insect
 name: Biotic stress: Insect
 def: "Biotic stress: Insect genetic characters" []
-is_a: GC:Biotic
+is_a: T3:Biotic
 
 [Term]
-id: GC:Biotic_LeafBlotch
+id: T3:Biotic_LeafBlotch
 name: Biotic stress: Leaf blotch
 def: "Biotic stress: Leaf blotch genetic characters" []
-is_a: GC:Biotic
+is_a: T3:Biotic
 
 [Term]
-id: GC:Biotic_PowderyMildew
+id: T3:Biotic_PowderyMildew
 name: Biotic stress: Powdery mildew
 def: "Biotic stress: Powdery mildew genetic characters" []
-is_a: GC:Biotic
+is_a: T3:Biotic
 
 [Term]
-id: GC:Biotic_Rust
+id: T3:Biotic_Rust
 name: Biotic stress: Rust
 def: "Biotic stress: Rust genetic characters" []
-is_a: GC:Biotic
+is_a: T3:Biotic
 
 [Term]
-id: GC:Biotic_Virus
+id: T3:Biotic_Virus
 name: Biotic stress: Virus
 def: "Biotic stress: Virus genetic characters" []
-is_a: GC:Biotic
+is_a: T3:Biotic
 
 [Term]
-id: GC:Morphological
+id: T3:Morphological
 name: Morphological
 def: "Morphological genetic characters" []
-is_a: GC:T3_GC_ROOT
+is_a: T3:T3_GC_ROOT
 
 [Term]
-id: GC:Quality
+id: T3:Quality
 name: Quality
 def: "Quality genetic characters" []
-is_a: GC:T3_GC_ROOT
+is_a: T3:T3_GC_ROOT
 
 [Term]
-id: GC:RyeTranslocations
+id: T3:RyeTranslocations
 name: Rye Translocations
 def: "Rye Translocations genetic characters" []
-is_a: GC:T3_GC_ROOT
+is_a: T3:T3_GC_ROOT
