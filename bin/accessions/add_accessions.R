@@ -42,6 +42,7 @@ createAccessions <- function(lines=NULL, programs=NULL, genus=NULL) {
     grin <- line$GRIN
     synonyms <- line$Synonym
     breeding_program <- line$Breeding.Program
+    pedigree <- line$Pedigree
     description <- line$Description
     
     # Parse Line Name
@@ -50,6 +51,9 @@ createAccessions <- function(lines=NULL, programs=NULL, genus=NULL) {
     # Create full species name
     if ( !is.null(genus) ) {
       species <- paste(genus, species, sep=" ")
+    }
+    if ( species == "barley" ) {
+      species <- "Hordeum vulgare"
     }
     
     
@@ -86,6 +90,11 @@ createAccessions <- function(lines=NULL, programs=NULL, genus=NULL) {
     }
     if ( !is.null(gs) ) {
       properties$accession_numbers <- gs
+    }
+
+    # Add Purdy Pedigree
+    if ( !is.na(pedigree) && !is.null(pedigree) && pedigree != "" ) {
+      properties$purdy_pedigree = pedigree
     }
     
     # Create Accession
