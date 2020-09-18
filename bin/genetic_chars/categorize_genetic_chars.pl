@@ -6,10 +6,11 @@ categorize_genetic_chars.pl
 
 =head1 DESCRIPTION
 
-Usage: perl categorize_genetic_chars.pl -H dbhost -D dbname [-t] -c chars
+Usage: perl categorize_genetic_chars.pl -H dbhost -D dbname [-rt] -c chars
 
 -H = db host
 -D = db name
+-r = remove existing associations to the locus category ontology
 -t = test, rollback any changes
 -c = file of genetic characters (Character,Category,Chromosome,Arm,Description,Values)
 
@@ -34,13 +35,14 @@ my $ONTO_NAME = "t3_locus_ontology";
 my $SP_PERSON_ID = 604;
 
 
-our ($opt_H, $opt_D, $opt_c, $opt_t);
+our ($opt_H, $opt_D, $opt_c, $opt_r, $opt_t);
 
-getopts('H:D:c:t');
+getopts('H:D:c:rt');
 
 my $dbhost = $opt_H;
 my $dbname = $opt_D;
 my $chars_file = $opt_c;
+my $remove = $opt_r;
 my $test = $opt_t;
 
 
@@ -56,13 +58,36 @@ print STDERR "Connected to database $dbname on host $dbhost.\n";
 my ($q, $sth);
 
 
-#### ASSOCIATE LOCI WITH CVTERMS ####
 
 # Get CV ID
 $q = "SELECT cv_id FROM public.cv WHERE name = ?;";
 $sth = $dbh->prepare($q);
 $sth->execute($ONTO_NAME);
 my ($CV_ID) = $sth->fetchrow_array();
+
+
+#### REMOVE EXISTING ASSOCIATIONS ####
+
+if ( $remove ) {
+    print STDERR "Removing existing loci/ontology associations...\n";
+
+    $q = "DELETE FROM phenome.locus_dbxref_evidence WHERE locus_dbxref_id IN (
+            SELECT locus_dbxref_id FROM phenome.locus_dbxref WHERE dbxref_id IN (
+                SELECT dbxref_id FROM cvterm WHERE cv_id = ?
+            )
+         );";
+    $sth = $dbh->prepare($q);
+    $sth->execute($CV_ID);
+
+    $q = "DELETE FROM phenome.locus_dbxref WHERE dbxref_id IN (
+            SELECT dbxref_id FROM cvterm WHERE cv_id = ?
+         );";
+    $sth = $dbh->prepare($q);
+    $sth->execute($CV_ID);
+}
+
+
+#### ASSOCIATE LOCI WITH CVTERMS ####
 
 # Open genetic chars file
 my $csv = Text::CSV->new({ sep_char => ',' });
