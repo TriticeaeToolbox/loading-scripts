@@ -82,10 +82,12 @@ createAccessions <- function(lines=NULL, programs=NULL, genus=NULL) {
     
     # Parse GRIN
     gs <- c()
-    for ( g in unlist(strsplit(grin, ",")) ) {
-      g <- trimws(g)
-      if ( g != "" ) {
-        gs <- c(gs, g)
+    if ( !is.na(grin) ) {
+      for ( g in unlist(strsplit(grin, ",")) ) {
+        g <- trimws(g)
+        if ( g != "" ) {
+          gs <- c(gs, g)
+        }
       }
     }
     if ( !is.null(gs) ) {
