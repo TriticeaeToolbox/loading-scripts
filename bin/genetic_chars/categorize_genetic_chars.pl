@@ -30,7 +30,7 @@ use Getopt::Std;
 
 
 #### DATABASE VARIABLES ####
-my $ONTO_NAME = "t3_genetic_character_ontology";
+my $ONTO_NAME = "t3_locus_ontology";
 my $SP_PERSON_ID = 604;
 
 
