@@ -15,7 +15,8 @@ Usage: perl categorize_genetic_chars.pl -H dbhost -D dbname [-rt] -c chars
 -c = file of genetic characters (Character,Category,Chromosome,Arm,Description,Values)
 
 This script will associate each T3 genetic character (breedbase locus) with a category 
-in the T3 Genetic Character Ontology.
+in the T3 Genetic Character Ontology.  Any locus that is NOT a T3 genetic character will 
+be categorized as a UniProt Protein.
 
 NOTE: The T3 Genetic Character Category ontology must be loaded before running this script!
 
@@ -32,6 +33,7 @@ use Getopt::Std;
 
 #### DATABASE VARIABLES ####
 my $ONTO_NAME = "t3_locus_ontology";
+my $ONTO_UNIPROT_NAME = "UniProt Proteins";
 my $SP_PERSON_ID = 604;
 
 
@@ -87,7 +89,7 @@ if ( $remove ) {
 }
 
 
-#### ASSOCIATE LOCI WITH CVTERMS ####
+#### ASSOCIATE GENETIC CHARS ####
 
 # Open genetic chars file
 my $csv = Text::CSV->new({ sep_char => ',' });
@@ -111,7 +113,6 @@ while ( my $line = <$data> ) {
 
         # Found matching locus...
         if ( $locus_id ) {
-
 
             # Get matching cvterm dbxref_id
             $q = "SELECT dbxref_id FROM public.cvterm WHERE cv_id = ? AND name = ?;";
@@ -158,6 +159,40 @@ while ( my $line = <$data> ) {
 
 
 
+#### ASSOCIATE UNIPROT PROTEINS ####
+
+# Find the loci that are not associated as T3 genetic characters
+$q = "SELECT locus_id FROM phenome.locus WHERE locus_id NOT IN (
+            SELECT DISTINCT locus_id FROM phenome.locus_dbxref WHERE dbxref_id IN (
+                SELECT dbxref_id FROM cvterm WHERE cv_id = ?
+            )
+         );";
+$sth = $dbh->prepare($q);
+$sth->execute($CV_ID);
+my $rows = $sth->fetchall_arrayref();
+
+# Get the category cvterm dbxref_id
+$q = "SELECT dbxref_id FROM public.cvterm WHERE cv_id = ? AND name = ?;";
+$sth = $dbh->prepare($q);
+$sth->execute($CV_ID, $ONTO_UNIPROT_NAME);
+my ($uniprot_dbxref_id) = $sth->fetchrow_array();
+
+# Associate each locus with the UniProt Category
+foreach my $row (@$rows) {
+    my $locus_id = $row->[0];
+    
+    $q = "INSERT INTO phenome.locus_dbxref (locus_id, dbxref_id, obsolete, sp_person_id) VALUES (?, ?, ?, ?) RETURNING locus_dbxref_id;";
+    $sth = $dbh->prepare($q);
+    $sth->execute($locus_id, $uniprot_dbxref_id, 'FALSE', $SP_PERSON_ID);
+    my ($locus_dbxref_id) = $sth->fetchrow_array();
+
+    $q = "INSERT INTO phenome.locus_dbxref_evidence (locus_dbxref_id, relationship_type_id, evidence_code_id, sp_person_id, obsolete) SELECT ?, dbxref_id, ?, ?, ? FROM public.dbxref WHERE accession = 'is_a';";
+    $sth = $dbh->prepare($q);
+    $sth->execute($locus_dbxref_id, $uniprot_dbxref_id, $SP_PERSON_ID, 'FALSE');
+
+    print STDERR "Added Locus #$locus_id to category $ONTO_UNIPROT_NAME...\n";
+}
+    
 
 
 # Rollback or Commit the Changes
