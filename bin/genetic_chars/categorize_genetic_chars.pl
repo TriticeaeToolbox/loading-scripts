@@ -15,10 +15,12 @@ Usage: perl categorize_genetic_chars.pl -H dbhost -D dbname [-rt] -c chars
 -c = file of genetic characters (Character,Category,Chromosome,Arm,Description,Values)
 
 This script will associate each T3 genetic character (breedbase locus) with a category 
-in the T3 Genetic Character Ontology.  Any locus that is NOT a T3 genetic character will 
-be categorized as a UniProt Protein.
+in the T3 Genetic Character Ontology (as specified in the file of genetic characters).  
+Any locus that is NOT a T3 genetic character and has a name that starts with 'TraesCS' 
+will be associated with the Ensembl Gene IDs category.  All other loci will be associated 
+with the UniProt Proteins category.
 
-NOTE: The T3 Genetic Character Category ontology must be loaded before running this script!
+NOTE: The T3 Locus Category ontology must be loaded before running this script!
 
 =cut
 
@@ -34,6 +36,7 @@ use Getopt::Std;
 #### DATABASE VARIABLES ####
 my $ONTO_NAME = "t3_locus_ontology";
 my $ONTO_UNIPROT_NAME = "UniProt Proteins";
+my $ONTO_ENSEMBL_NAME = "Ensembl Gene IDs";
 my $SP_PERSON_ID = 604;
 
 
@@ -159,10 +162,10 @@ while ( my $line = <$data> ) {
 
 
 
-#### ASSOCIATE UNIPROT PROTEINS ####
+#### ASSOCIATE REMAINING LOCI ####
 
 # Find the loci that are not associated as T3 genetic characters
-$q = "SELECT locus_id FROM phenome.locus WHERE locus_id NOT IN (
+$q = "SELECT locus_id, locus_name FROM phenome.locus WHERE locus_id NOT IN (
             SELECT DISTINCT locus_id FROM phenome.locus_dbxref WHERE dbxref_id IN (
                 SELECT dbxref_id FROM cvterm WHERE cv_id = ?
             )
@@ -171,26 +174,49 @@ $sth = $dbh->prepare($q);
 $sth->execute($CV_ID);
 my $rows = $sth->fetchall_arrayref();
 
-# Get the category cvterm dbxref_id
+# Get the category cvterm dbxref_id for uniprot
 $q = "SELECT dbxref_id FROM public.cvterm WHERE cv_id = ? AND name = ?;";
 $sth = $dbh->prepare($q);
 $sth->execute($CV_ID, $ONTO_UNIPROT_NAME);
 my ($uniprot_dbxref_id) = $sth->fetchrow_array();
 
-# Associate each locus with the UniProt Category
+# Get the category cvterm dbxref_id for ensembl
+$q = "SELECT dbxref_id FROM public.cvterm WHERE cv_id = ? AND name = ?;";
+$sth = $dbh->prepare($q);
+$sth->execute($CV_ID, $ONTO_ENSEMBL_NAME);
+my ($ensembl_dbxref_id) = $sth->fetchrow_array();
+
+# Associate each locus with the UniProt or Ensembl Category
 foreach my $row (@$rows) {
     my $locus_id = $row->[0];
+    my $locus_name = $row->[1];
+    my $locus_category_id = undef;
+
+    # If the Locus name starts with 'TraesCS' -> Ensemble
+    if ( $locus_name =~ m/^TraesCS/ ) {
+        $locus_category_id = $ensembl_dbxref_id;
+    }
+    # All others -> UniProt
+    else {
+        $locus_category_id = $uniprot_dbxref_id;
+    }
     
-    $q = "INSERT INTO phenome.locus_dbxref (locus_id, dbxref_id, obsolete, sp_person_id) VALUES (?, ?, ?, ?) RETURNING locus_dbxref_id;";
-    $sth = $dbh->prepare($q);
-    $sth->execute($locus_id, $uniprot_dbxref_id, 'FALSE', $SP_PERSON_ID);
-    my ($locus_dbxref_id) = $sth->fetchrow_array();
+    # Associate the locus with the proper category
+    if ( defined($locus_category_id) ) {
+        $q = "INSERT INTO phenome.locus_dbxref (locus_id, dbxref_id, obsolete, sp_person_id) VALUES (?, ?, ?, ?) RETURNING locus_dbxref_id;";
+        $sth = $dbh->prepare($q);
+        $sth->execute($locus_id, $locus_category_id, 'FALSE', $SP_PERSON_ID);
+        my ($locus_dbxref_id) = $sth->fetchrow_array();
 
-    $q = "INSERT INTO phenome.locus_dbxref_evidence (locus_dbxref_id, relationship_type_id, evidence_code_id, sp_person_id, obsolete) SELECT ?, dbxref_id, ?, ?, ? FROM public.dbxref WHERE accession = 'is_a';";
-    $sth = $dbh->prepare($q);
-    $sth->execute($locus_dbxref_id, $uniprot_dbxref_id, $SP_PERSON_ID, 'FALSE');
+        $q = "INSERT INTO phenome.locus_dbxref_evidence (locus_dbxref_id, relationship_type_id, evidence_code_id, sp_person_id, obsolete) SELECT ?, dbxref_id, ?, ?, ? FROM public.dbxref WHERE accession = 'is_a';";
+        $sth = $dbh->prepare($q);
+        $sth->execute($locus_dbxref_id, $locus_category_id, $SP_PERSON_ID, 'FALSE');
 
-    print STDERR "Added Locus #$locus_id to category $ONTO_UNIPROT_NAME...\n";
+        print STDERR "Added Locus $locus_name to category $ONTO_UNIPROT_NAME...\n";
+    }
+    else {
+        print STDERR "ERROR: Locus $locus_name could not be associated with a category!\n";
+    }
 }
     
 
