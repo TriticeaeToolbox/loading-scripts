@@ -83,3 +83,8 @@ is_a: T3:T3_GC_CATEGORIES
 id: T3:UNIPROT_PROTEINS
 name: UniProt Proteins
 is_a: T3:T3_LC_ROOT
+
+[Term]
+id: T3:ENSEMBL_GENE_IDS
+name: Ensembl Gene IDs
+is_a: T3:T3_LC_ROOT
