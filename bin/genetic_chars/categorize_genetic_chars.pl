@@ -212,7 +212,7 @@ foreach my $row (@$rows) {
         $sth = $dbh->prepare($q);
         $sth->execute($locus_dbxref_id, $locus_category_id, $SP_PERSON_ID, 'FALSE');
 
-        print STDERR "Added Locus $locus_name to category $ONTO_UNIPROT_NAME...\n";
+        print STDERR "Added Locus $locus_name to category $locus_category_id...\n";
     }
     else {
         print STDERR "ERROR: Locus $locus_name could not be associated with a category!\n";
