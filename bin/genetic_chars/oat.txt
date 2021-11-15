@@ -11,3 +11,15 @@ loci_filter_onto            T3:T3_LC_ROOT
 loci_filter_onto_gc         T3:T3_GC_CATEGORIES
 
 # RESTART
+
+# TAG EXISTING UNIPROT PROTEINS
+SELECT dbxref_id FROM public.cvterm WHERE name = 'UniProt Proteins'; --212961
+SELECT dbxref_id FROM public.dbxref WHERE accession = 'is_a'; --19
+--603 = sp_person_id
+
+INSERT INTO phenome.locus_dbxref (locus_id, dbxref_id, obsolete, sp_person_id) 
+SELECT locus_id, 212961, 'FALSE', 603 FROM phenome.locus
+RETURNING locus_dbxref_id; --1 -> 2398
+
+INSERT INTO phenome.locus_dbxref_evidence (locus_dbxref_id, relationship_type_id, evidence_code_id, sp_person_id, obsolete)
+SELECT locus_dbxref_id, 19, 212961, 603, 'FALSE' FROM phenome.locus_dbxref WHERE locus_dbxref_id >= 1;
