@@ -1,3 +1,13 @@
 # CREATE THE T3 LOCUS ONTOLOGY FOR OAT
 
 # LOAD THE T3 LOCUS ONTOLOGY
+copy locus ontology .obo file into container
+perl ./gmod_load_cvterms.pl -H breedbase_db -D cxgn_avena_test -d Pg -r postgres -p "^@noid-h" -s T3 -n t3_locus_ontology -uv ~/public/t3_locus_ontology.obo
+perl ./gmod_make_cvtermpath.pl -H breedbase_db -D cxgn_avena_test -d Pg -u postgres -p "^@noid-h" -c t3_locus_ontology -v
+
+# UPDATE SGN CONF
+onto_root_namespaces        ..., TO (Trait Ontology), T3 (T3 Ontology)
+loci_filter_onto            T3:T3_LC_ROOT
+loci_filter_onto_gc         T3:T3_GC_CATEGORIES
+
+# RESTART

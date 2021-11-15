@@ -38,12 +38,6 @@ def: "Morphological genetic characters" []
 is_a: T3:T3_GC_CATEGORIES
 
 [Term]
-id: T3:RyeTranslocations
-name: Rye Translocations
-def: "Rye Translocations genetic characters" []
-is_a: T3:T3_GC_CATEGORIES
-
-[Term]
 id: T3:UNIPROT_PROTEINS
 name: UniProt Proteins
 is_a: T3:T3_LC_ROOT
