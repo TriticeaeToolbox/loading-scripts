@@ -17,7 +17,7 @@ fi
 
 
 # Find the header line
-header=$(grep "^#* *CHROM\tPOS" "$1")
+header=$(grep "^#* *CHROM[[:space:]]POS" "$1")
 header=$(echo "$header" | sed -e 's/^#* *//g')
 
 # Convert tab-separated string to a comma-separated string

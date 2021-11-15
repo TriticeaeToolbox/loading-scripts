@@ -11,7 +11,7 @@ if [ "$#" -ne 2 ]; then
 fi
 
 # Find the header line
-line=$(grep -n "^# *CHROM\tPOS" "$1" | cut -d ':' -f 1)
+line=$(grep -m 1 -n "^# *CHROM[[:space:]]POS" "$1" | cut -d ':' -f 1)
 
 # Replace the header line
 sed "$(echo $line)s/.*/$(cat $2)/" "$1"
