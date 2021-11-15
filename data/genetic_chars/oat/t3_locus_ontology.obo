@@ -1,0 +1,49 @@
+format-version: 1.0
+data-version: 1
+date: 10:08:2019 11:00
+saved-by: t3
+default-namespace: t3_locus_ontology
+
+[Term]
+id: T3:T3_LC_ROOT
+name: T3 Locus Categories
+
+[Term]
+id: T3:T3_GC_CATEGORIES
+name: T3 Genetic Characters
+is_a: T3:T3_LC_ROOT
+
+[Term]
+id: T3:Agronomic
+name: Agronomic
+def: "Agronomic genetic characters" []
+is_a: T3:T3_GC_CATEGORIES
+
+[Term]
+id: T3:Biotic
+name: Biotic stress
+def: "Biotic genetic characters" []
+is_a: T3:T3_GC_CATEGORIES
+
+[Term]
+id: T3:EndUse
+name: End Use
+def: "End Use genetic characters" []
+is_a: T3:T3_GC_CATEGORIES
+
+[Term]
+id: T3:Morphological
+name: Morphological
+def: "Morphological genetic characters" []
+is_a: T3:T3_GC_CATEGORIES
+
+[Term]
+id: T3:RyeTranslocations
+name: Rye Translocations
+def: "Rye Translocations genetic characters" []
+is_a: T3:T3_GC_CATEGORIES
+
+[Term]
+id: T3:UNIPROT_PROTEINS
+name: UniProt Proteins
+is_a: T3:T3_LC_ROOT
