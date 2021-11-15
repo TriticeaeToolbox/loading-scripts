@@ -11,6 +11,7 @@ loci_filter_onto            T3:T3_LC_ROOT
 loci_filter_onto_gc         T3:T3_GC_CATEGORIES
 
 # RESTART
+bb reload avena_sandbox
 
 # TAG EXISTING UNIPROT PROTEINS
 SELECT dbxref_id FROM public.cvterm WHERE name = 'UniProt Proteins'; --212961
@@ -23,3 +24,24 @@ RETURNING locus_dbxref_id; --1 -> 2398
 
 INSERT INTO phenome.locus_dbxref_evidence (locus_dbxref_id, relationship_type_id, evidence_code_id, sp_person_id, obsolete)
 SELECT locus_dbxref_id, 19, 212961, 603, 'FALSE' FROM phenome.locus_dbxref WHERE locus_dbxref_id >= 1;
+
+# UPDATE INSTANCE
+bb pull avena_sandbox
+
+# CREATE GENETIC CHARACTERS TEMPLATE
+use genetic character descriptions from old site
+
+# CREATE GENETIC CHARACTER VALUES TEMPLATE
+use genetic character descriptions from old site
+
+# CREATE GENETIC CHARACTER ASSOCIATIONS TEMPLATE
+use bulk download from old site
+Rename accesions in template:
+MARION_CANADA -> MARION_QC
+FORAGEPLUS -> FORAGE_PLUS
+[0-9]{4} -> 0$1 (except 5445, 5446)
+6-107 -> TAMO312
+HIFI/SHERWOOD -> HIFIxSHERWOOD
+LEGGET -> LEGGETT
+WI_X6165-6 -> VISTA
+STARTER/AMAG -> STARTERxAMAG

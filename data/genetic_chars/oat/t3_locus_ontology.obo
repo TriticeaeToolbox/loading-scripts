@@ -21,7 +21,7 @@ is_a: T3:T3_GC_CATEGORIES
 
 [Term]
 id: T3:Biotic
-name: Biotic stress
+name: Biotic Stress
 def: "Biotic genetic characters" []
 is_a: T3:T3_GC_CATEGORIES
 
