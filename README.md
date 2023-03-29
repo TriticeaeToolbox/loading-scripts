@@ -215,3 +215,11 @@ perl ./bin/accessions/add_stock_pedigrees.pl -H localhost -D cxgn_avena -d pedig
 ```
 
 ~~Finally, in order for the pedigree property to be displayed on the Stock detail page, the `editable_stock_props` configuration variable (`sgn_local.conf`) needs to have `pedigree` appended to it.~~
+
+## Generate `web_usr` grants
+
+To generate the sql statements for all of the permissions for the `web_usr`:
+
+```
+pg_dump -h localhost -U postgres -d cxgn_triticum_test --schema-only | grep -e '^\(ALTER\|GRANT\) .* TO web_usr;$' > grants.sql
+```
